@@ -169,3 +169,22 @@ footer {
         font-size: 1.5rem;
     }
 }
+
+
+/* --- Tarjeta producto: emoji grande --- */
+.tarjeta-producto .card-emoji {
+    font-size: 3rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* --- Boton eliminar hover --- */
+.tarjeta-producto .btn-danger {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s;
+}
+
+.tarjeta-producto .btn-danger:hover {
+    opacity: 0.85;
+}
