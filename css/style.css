@@ -119,3 +119,53 @@ footer {
         font-size: 2rem;
     }
 }
+
+
+/* ===========================================
+   SEMANA 7 - Estilos catalogo dinamico
+   =========================================== */
+
+/* --- Catalogo de productos dinamico --- */
+#catalogo {
+    background-color: #f8f9fa;
+}
+
+#catalogo .card {
+    border-left: 4px solid var(--color-accent);
+}
+
+#catalogo .badge {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+/* --- Seccion Registrar --- */
+#registrar {
+    background-color: #fff;
+}
+
+/* --- Seccion Video --- */
+#video {
+    background-color: #f8f9fa;
+}
+
+/* --- Formulario: mensajes de error --- */
+.form-text {
+    font-size: 0.85rem;
+    min-height: 1.2em;
+}
+
+/* --- Alerta exito --- */
+#alertaExito {
+    border-left: 4px solid #198754;
+}
+
+/* --- Responsive extra pequeno --- */
+@media (max-width: 400px) {
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+    #inicio h2 {
+        font-size: 1.5rem;
+    }
+}
