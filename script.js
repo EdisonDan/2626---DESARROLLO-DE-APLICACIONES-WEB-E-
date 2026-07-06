@@ -4,7 +4,7 @@
  * Autor: Daniel Garzon - Desarrollo de Aplicaciones Web 2026
  */
 
-// ─── Semana 7: Arreglo inicial de productos (datos del proyecto) ─────────────
+// --- Semana 7: Arreglo inicial de productos ---
 const productos = [
   { nombre: 'Teclado Mecanico RGB', descripcion: 'Teclado gaming con switches azules y retroiluminacion RGB', categoria: 'teclado' },
   { nombre: 'Mouse Inalambrico Pro', descripcion: 'Mouse ergonomico con 3200 DPI y bateria de larga duracion', categoria: 'mouse' },
@@ -13,29 +13,29 @@ const productos = [
   { nombre: 'Mousepad XL Antideslizante', descripcion: 'Mousepad extra grande con base de goma antideslizante y bordes cosidos', categoria: 'mousepad' }
 ];
 
-// ─── Iconos por categoria ────────────────────────────────────────────────────
-const iconosCategoria = {
-  teclado:  'TECLADO',
-  mouse:    'MOUSE',
-  pantalla: 'PANTALLA',
-  audifonos:'AUDIFONOS',
-  mousepad: 'MOUSEPAD',
-  otro:     'OTRO'
-};
-
+// --- Emojis e iconos por categoria ---
 const emojisCategoria = {
-  teclado:  'keyboard',
-  mouse:    'mouse-fill',
-  pantalla: 'display',
-  audifonos:'headphones',
-  mousepad: 'tablet',
-  otro:     'box-seam'
+  teclado:   '⌨️',
+  mouse:     '🖱️',
+  pantalla:  '🖥️',
+  audifonos: '🎧',
+  mousepad:  '🖰️',
+  otro:      '📦'
 };
 
-// ─── Estado global ───────────────────────────────────────────────────────────
+const nombresCategoria = {
+  teclado:   'Teclado',
+  mouse:     'Mouse',
+  pantalla:  'Pantalla',
+  audifonos: 'Audifonos',
+  mousepad:  'Mousepad',
+  otro:      'Otro'
+};
+
+// --- Estado global ---
 let totalRegistros = 0;
 
-// ─── Referencias al DOM ─────────────────────────────────────────────────────
+// --- Referencias al DOM ---
 const formulario      = document.getElementById('formProducto');
 const inputNombre     = document.getElementById('prodNombre');
 const inputDesc       = document.getElementById('prodDescripcion');
@@ -45,32 +45,32 @@ const mensajeCatalogo = document.getElementById('mensajeCatalogo');
 const contadorEl      = document.getElementById('contadorRegistros');
 const alertaExito     = document.getElementById('alertaExito');
 
-// ─── Actualizar contador ──────────────────────────────────────────────────────
+// --- Actualizar contador ---
 function actualizarContador() {
   contadorEl.textContent = totalRegistros;
 }
 
-// ─── Marcar campo como invalido ───────────────────────────────────────────────
+// --- Marcar campo invalido ---
 function marcarInvalido(campo, msgEl, texto) {
   campo.classList.remove('is-valid');
   campo.classList.add('is-invalid');
   msgEl.textContent = texto;
 }
 
-// ─── Marcar campo como valido ─────────────────────────────────────────────────
+// --- Marcar campo valido ---
 function marcarValido(campo, msgEl) {
   campo.classList.remove('is-invalid');
   campo.classList.add('is-valid');
   msgEl.textContent = '';
 }
 
-// ─── Limpiar estado de un campo ───────────────────────────────────────────────
+// --- Limpiar campo ---
 function limpiarCampo(campo, msgEl) {
   campo.classList.remove('is-valid', 'is-invalid');
   msgEl.textContent = '';
 }
 
-// ─── Validar campo Nombre ─────────────────────────────────────────────────────
+// --- Validar Nombre ---
 function validarNombre() {
   const msgEl = document.getElementById('msgNombre');
   const valor = inputNombre.value.trim();
@@ -86,7 +86,7 @@ function validarNombre() {
   return true;
 }
 
-// ─── Validar campo Descripcion ────────────────────────────────────────────────
+// --- Validar Descripcion ---
 function validarDescripcion() {
   const msgEl = document.getElementById('msgDesc');
   const valor = inputDesc.value.trim();
@@ -95,14 +95,14 @@ function validarDescripcion() {
     return false;
   }
   if (valor.length < 20) {
-    marcarInvalido(inputDesc, msgEl, 'La descripcion es muy corta (' + valor.length + '/20 caracteres minimos).');
+    marcarInvalido(inputDesc, msgEl, 'Descripcion muy corta (' + valor.length + '/20 caracteres minimos).');
     return false;
   }
   marcarValido(inputDesc, msgEl);
   return true;
 }
 
-// ─── Validar campo Categoria ──────────────────────────────────────────────────
+// --- Validar Categoria ---
 function validarCategoria() {
   const msgEl = document.getElementById('msgCategoria');
   if (selectCategoria.value === '') {
@@ -113,41 +113,50 @@ function validarCategoria() {
   return true;
 }
 
-// ─── Semana 7: Crear tarjeta de producto (funcion reutilizable) ───────────────
+// --- Crear tarjeta de producto (mejorada) ---
 function crearTarjeta(nombre, descripcion, categoria) {
-  const etiqueta = iconosCategoria[categoria] || 'OTRO';
+  const emoji    = emojisCategoria[categoria]  || '📦';
+  const etiqueta = nombresCategoria[categoria] || 'Otro';
 
   const col = document.createElement('div');
   col.classList.add('col-sm-6', 'col-lg-4');
 
   const card = document.createElement('div');
-  card.classList.add('card', 'h-100', 'text-center', 'p-3');
+  card.classList.add('card', 'h-100', 'text-center', 'p-3', 'tarjeta-producto');
 
+  // Emoji grande
+  const emojiEl = document.createElement('div');
+  emojiEl.classList.add('card-emoji');
+  emojiEl.textContent = emoji;
+
+  // Badge de categoria
   const badge = document.createElement('span');
   badge.classList.add('badge', 'bg-danger', 'mb-2');
   badge.textContent = etiqueta;
 
+  // Titulo
   const titulo = document.createElement('h5');
-  titulo.classList.add('card-title', 'mt-1');
+  titulo.classList.add('card-title');
   titulo.textContent = nombre;
 
+  // Descripcion
   const desc = document.createElement('p');
   desc.classList.add('card-text', 'text-muted', 'small');
   desc.textContent = descripcion;
 
+  // Boton eliminar (fondo solido)
   const btnEliminar = document.createElement('button');
-  btnEliminar.classList.add('btn', 'btn-outline-danger', 'btn-sm', 'mt-2', 'w-100');
-  btnEliminar.textContent = 'Eliminar';
+  btnEliminar.classList.add('btn', 'btn-danger', 'btn-sm', 'mt-2', 'w-100');
+  btnEliminar.innerHTML = '&#128465; Eliminar';
 
-  // Evento eliminar
   btnEliminar.addEventListener('click', function () {
     col.remove();
     totalRegistros--;
     actualizarContador();
-    // Condicion: si no quedan productos, mostrar mensaje
     verificarCatalogo();
   });
 
+  card.appendChild(emojiEl);
   card.appendChild(badge);
   card.appendChild(titulo);
   card.appendChild(desc);
@@ -156,7 +165,7 @@ function crearTarjeta(nombre, descripcion, categoria) {
   return col;
 }
 
-// ─── Semana 7: Verificar si el catalogo esta vacio (condicion) ────────────────
+// --- Verificar si el catalogo esta vacio ---
 function verificarCatalogo() {
   if (totalRegistros === 0) {
     mensajeCatalogo.classList.remove('d-none');
@@ -165,7 +174,7 @@ function verificarCatalogo() {
   }
 }
 
-// ─── Semana 7: Renderizar arreglo inicial de productos ────────────────────────
+// --- Renderizar productos iniciales ---
 function renderizarProductosIniciales() {
   productos.forEach(function (prod) {
     const tarjeta = crearTarjeta(prod.nombre, prod.descripcion, prod.categoria);
@@ -176,7 +185,7 @@ function renderizarProductosIniciales() {
   verificarCatalogo();
 }
 
-// ─── Mostrar alerta de exito ──────────────────────────────────────────────────
+// --- Mostrar alerta exito ---
 function mostrarAlertaExito() {
   alertaExito.classList.remove('d-none');
   setTimeout(function () {
@@ -184,32 +193,29 @@ function mostrarAlertaExito() {
   }, 3000);
 }
 
-// ─── Limpiar formulario ───────────────────────────────────────────────────────
+// --- Limpiar formulario ---
 function limpiarFormulario() {
   formulario.reset();
-  limpiarCampo(inputNombre, document.getElementById('msgNombre'));
-  limpiarCampo(inputDesc, document.getElementById('msgDesc'));
+  limpiarCampo(inputNombre,     document.getElementById('msgNombre'));
+  limpiarCampo(inputDesc,       document.getElementById('msgDesc'));
   limpiarCampo(selectCategoria, document.getElementById('msgCategoria'));
 }
 
-// ─── EVENTO: submit del formulario ───────────────────────────────────────────
+// --- EVENTO: submit ---
 formulario.addEventListener('submit', function (evento) {
-  evento.preventDefault(); // Semana 6: evita recarga de pagina
+  evento.preventDefault();
 
   const nombreValido      = validarNombre();
   const descripcionValida = validarDescripcion();
   const categoriaValida   = validarCategoria();
 
-  // Solo registrar si todo es valido
   if (!nombreValido || !descripcionValida || !categoriaValida) return;
 
   const nombre      = inputNombre.value.trim();
   const descripcion = inputDesc.value.trim();
   const categoria   = selectCategoria.value;
 
-  // Semana 7: agregar al arreglo y renderizar
-  const nuevoProd = { nombre, descripcion, categoria };
-  productos.push(nuevoProd);
+  productos.push({ nombre, descripcion, categoria });
 
   const tarjeta = crearTarjeta(nombre, descripcion, categoria);
   catalogoEl.appendChild(tarjeta);
@@ -220,7 +226,7 @@ formulario.addEventListener('submit', function (evento) {
   limpiarFormulario();
 });
 
-// ─── EVENTOS: validacion en tiempo real (input) y al salir (blur) ─────────────
+// --- EVENTOS: validacion en tiempo real ---
 inputNombre.addEventListener('input', validarNombre);
 inputDesc.addEventListener('input', validarDescripcion);
 selectCategoria.addEventListener('change', validarCategoria);
@@ -229,7 +235,7 @@ inputNombre.addEventListener('blur', validarNombre);
 inputDesc.addEventListener('blur', validarDescripcion);
 selectCategoria.addEventListener('blur', validarCategoria);
 
-// ─── Inicializar: renderizar productos del arreglo al cargar la pagina ────────
+// --- Inicializar al cargar la pagina ---
 document.addEventListener('DOMContentLoaded', function () {
   renderizarProductosIniciales();
 });
