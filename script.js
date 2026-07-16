@@ -1,6 +1,6 @@
 /**
  * script.js - OPEN+
- * Semanas 6 y 7: Validaciones dinámicas + Catálogo con arreglos y objetos
+ * Semanas 6, 7 y 8: Validaciones + Catálogo + Bootstrap Modal/Spinner
  * Autor: Daniel Garzón - Desarrollo de Aplicaciones Web 2026
  *
  * Estructura preparada para futura migración a Flask:
@@ -58,10 +58,13 @@ const catalogoEl      = document.getElementById('catalogo-productos');
 const mensajeCatalogo = document.getElementById('mensajeCatalogo');
 const contadorEl      = document.getElementById('contadorRegistros');
 const alertaExito     = document.getElementById('alertaExito');
+const alertaError     = document.getElementById('alertaError');
 const cuerpoTabla     = document.getElementById('cuerpoTabla');
 const mensajeTabla    = document.getElementById('mensajeTabla');
 const filtrosEl       = document.getElementById('filtros');
 const statsGridEl     = document.getElementById('statsGrid');
+const spinnerEl       = document.getElementById('spinnerRegistro');
+const btnVerUltimo    = document.getElementById('btnVerUltimo');
 
 // =============================================================
 // HELPERS DE VALIDACIÓN (Semana 6 — conservados)
@@ -137,7 +140,6 @@ function crearTarjeta(prod, index) {
   col.classList.add('col-sm-6', 'col-lg-4');
   col.setAttribute('data-categoria', prod.categoria);
 
-  // CONDICIÓN: badge de disponibilidad según estado del producto
   const estadoBadge = prod.disponible
     ? '<span class="badge bg-success ms-1">Disponible</span>'
     : '<span class="badge bg-danger ms-1">Agotado</span>';
@@ -151,8 +153,13 @@ function crearTarjeta(prod, index) {
         <h5 class="card-title mt-2">${prod.nombre}</h5>
         <p class="card-text text-muted small">${prod.descripcion}</p>
       </div>
-      <div class="card-footer bg-transparent border-0 pb-3 text-center">
-        <button class="btn btn-danger btn-sm btn-eliminar w-100" data-index="${index}" aria-label="Eliminar ${prod.nombre}">
+      <div class="card-footer bg-transparent border-0 pb-3 text-center d-flex gap-2">
+        <button class="btn btn-outline-primary btn-sm btn-detalle flex-fill"
+                data-index="${index}" aria-label="Ver detalle de ${prod.nombre}">
+          🔎 Detalle
+        </button>
+        <button class="btn btn-danger btn-sm btn-eliminar flex-fill"
+                data-index="${index}" aria-label="Eliminar ${prod.nombre}">
           🗑️ Eliminar
         </button>
       </div>
@@ -167,12 +174,16 @@ function crearTarjeta(prod, index) {
     crearFiltros();
   });
 
+  col.querySelector('.btn-detalle').addEventListener('click', function () {
+    const idx = parseInt(this.dataset.index);
+    abrirModal(idx);
+  });
+
   return col;
 }
 
 // =============================================================
 // RENDER: Catálogo completo con filtro activo
-// Estructura repetitiva: forEach sobre productos[]
 // =============================================================
 function renderizarCatalogo() {
   catalogoEl.innerHTML = '';
@@ -182,14 +193,12 @@ function renderizarCatalogo() {
     ? productos
     : productos.filter(p => p.categoria === filtroActivo);
 
-  // CONDICIÓN: mostrar mensaje si no hay productos
   if (productos.length === 0) {
     mensajeCatalogo.classList.remove('d-none');
   } else {
     mensajeCatalogo.classList.add('d-none');
   }
 
-  // Estructura repetitiva: un forEach genera cada tarjeta sin repetir HTML
   productosFiltrados.forEach(function (prod) {
     const realIndex = productos.indexOf(prod);
     const tarjeta = crearTarjeta(prod, realIndex);
@@ -201,24 +210,20 @@ function renderizarCatalogo() {
 }
 
 // =============================================================
-// RENDER: Tabla de registros (Semana 7 — segunda estructura repetitiva)
-// Futuro Flask: tabla renderizada vía Jinja2 for loop
+// RENDER: Tabla de registros (Semana 7 + columna Detalle Semana 8)
 // =============================================================
 function renderizarTabla() {
   cuerpoTabla.innerHTML = '';
 
-  // CONDICIÓN: mostrar advertencia si la tabla está vacía
   if (productos.length === 0) {
     mensajeTabla.classList.remove('d-none');
     return;
   }
   mensajeTabla.classList.add('d-none');
 
-  // Estructura repetitiva sobre productos[]
   productos.forEach(function (prod, i) {
     const meta = metaCategoria[prod.categoria] || metaCategoria.otro;
 
-    // CONDICIÓN: clase de fila según disponibilidad
     const estadoHtml = prod.disponible
       ? '<span class="badge bg-success">Disponible</span>'
       : '<span class="badge bg-danger">Agotado</span>';
@@ -231,14 +236,26 @@ function renderizarTabla() {
       <td>${prod.nombre}</td>
       <td><span class="badge bg-${meta.color}">${meta.label}</span></td>
       <td>${estadoHtml}</td>
+      <td>
+        <button class="btn btn-outline-primary btn-sm btn-detalle-tabla"
+                data-index="${i}"
+                data-bs-toggle="modal" data-bs-target="#modalProducto"
+                aria-label="Ver detalle de ${prod.nombre}">
+          🔎 Ver
+        </button>
+      </td>
     `;
+
+    tr.querySelector('.btn-detalle-tabla').addEventListener('click', function () {
+      abrirModal(parseInt(this.dataset.index));
+    });
+
     cuerpoTabla.appendChild(tr);
   });
 }
 
 // =============================================================
 // RENDER: Filtros de categoría
-// Generados dinámicamente desde las categorías presentes en productos[]
 // =============================================================
 function crearFiltros() {
   filtrosEl.innerHTML = '';
@@ -270,7 +287,6 @@ function crearFiltros() {
 
 // =============================================================
 // RENDER: Stats (sección Quiénes Somos)
-// Estructura repetitiva sobre arreglo stats[]
 // =============================================================
 function renderizarStats() {
   statsGridEl.innerHTML = '';
@@ -283,6 +299,42 @@ function renderizarStats() {
 }
 
 // =============================================================
+// MODAL — Semana 8
+// Rellena y abre el modal con los datos del producto seleccionado
+// =============================================================
+function abrirModal(index) {
+  const prod = productos[index];
+  if (!prod) return;
+
+  const meta = metaCategoria[prod.categoria] || metaCategoria.otro;
+
+  document.getElementById('modalEmoji').textContent      = meta.emoji;
+  document.getElementById('modalNombre').textContent     = prod.nombre;
+  document.getElementById('modalCategoria').innerHTML    = `<span class="badge bg-${meta.color}">${meta.label}</span>`;
+  document.getElementById('modalDescripcion').textContent = prod.descripcion;
+  document.getElementById('modalEstado').innerHTML       = prod.disponible
+    ? '<span class="badge bg-success">Disponible</span>'
+    : '<span class="badge bg-danger">Agotado</span>';
+
+  const modal = new bootstrap.Modal(document.getElementById('modalProducto'));
+  modal.show();
+}
+
+// =============================================================
+// SPINNER — Semana 8
+// Muestra el spinner 1.2 s antes de registrar el producto
+// =============================================================
+function mostrarSpinner() {
+  return new Promise(function (resolve) {
+    spinnerEl.classList.remove('d-none');
+    setTimeout(function () {
+      spinnerEl.classList.add('d-none');
+      resolve();
+    }, 1200);
+  });
+}
+
+// =============================================================
 // UTILIDADES
 // =============================================================
 function actualizarContador() {
@@ -290,10 +342,23 @@ function actualizarContador() {
 }
 
 function mostrarAlertaExito() {
-  alertaExito.classList.remove('d-none');
+  alertaError.classList.add('d-none');
+  alertaExito.classList.remove('d-none', 'show');
+  alertaExito.classList.add('show');
   setTimeout(function () {
+    alertaExito.classList.remove('show');
     alertaExito.classList.add('d-none');
   }, 3000);
+}
+
+function mostrarAlertaError() {
+  alertaExito.classList.add('d-none');
+  alertaError.classList.remove('d-none', 'show');
+  alertaError.classList.add('show');
+  setTimeout(function () {
+    alertaError.classList.remove('show');
+    alertaError.classList.add('d-none');
+  }, 4000);
 }
 
 function limpiarFormulario() {
@@ -305,16 +370,26 @@ function limpiarFormulario() {
 
 // =============================================================
 // EVENTO: submit del formulario
-// Registra nuevo producto y re-renderiza secciones dinámicas
+// Semana 8: incorpora spinner y alerta de error
 // =============================================================
-formulario.addEventListener('submit', function (evento) {
+formulario.addEventListener('submit', async function (evento) {
   evento.preventDefault();
 
   const nombreValido      = validarNombre();
   const descripcionValida = validarDescripcion();
   const categoriaValida   = validarCategoria();
 
-  if (!nombreValido || !descripcionValida || !categoriaValida) return;
+  if (!nombreValido || !descripcionValida || !categoriaValida) {
+    mostrarAlertaError();
+    return;
+  }
+
+  // Deshabilitar botón durante el proceso
+  const btnSubmit = formulario.querySelector('[type="submit"]');
+  btnSubmit.disabled = true;
+
+  // Mostrar spinner simulando proceso de carga
+  await mostrarSpinner();
 
   const nuevoProducto = {
     nombre:      inputNombre.value.trim(),
@@ -330,6 +405,15 @@ formulario.addEventListener('submit', function (evento) {
   crearFiltros();
   mostrarAlertaExito();
   limpiarFormulario();
+
+  // Habilitar botón "Ver detalle" del último producto
+  btnVerUltimo.disabled = false;
+  btnVerUltimo.dataset.index = productos.length - 1;
+  btnVerUltimo.onclick = function () {
+    abrirModal(productos.length - 1);
+  };
+
+  btnSubmit.disabled = false;
 
   document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
