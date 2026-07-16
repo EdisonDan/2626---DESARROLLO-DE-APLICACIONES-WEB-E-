@@ -308,3 +308,12 @@ footer {
     #inicio h1 { font-size: 1.5rem; }
     .stats-grid { grid-template-columns: 1fr; }
 }
+
+/* =============================================
+   MODAL — Semana 8
+   ============================================= */
+.modal-emoji {
+    font-size: 4rem;
+    line-height: 1;
+    display: block;
+}
