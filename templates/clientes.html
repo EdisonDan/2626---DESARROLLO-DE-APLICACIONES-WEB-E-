@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Módulo de Clientes</h2>
+<p>Listado demostrativo de clientes registrados.</p>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>1</td><td>Juan Pérez</td><td>1723456789</td><td>0991234567</td></tr>
+        <tr><td>2</td><td>María López</td><td>1712345678</td><td>0987654321</td></tr>
+        <tr><td>3</td><td>Carlos Ruiz</td><td>1709876543</td><td>0974561230</td></tr>
+    </tbody>
+</table>
+{% endblock %}

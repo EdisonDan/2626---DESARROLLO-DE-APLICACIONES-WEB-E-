@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h2>Bienvenido al Proyecto Integrador</h2>
+    <p class="lead">
+        Esta es la página principal informativa del sistema. Desde aquí puedes acceder a los módulos
+        de productos, clientes, proveedores y facturación.
+    </p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Productos</h5>
+                <p class="card-text">Consulta el catálogo de productos disponibles en el sistema.</p>
+                <a href="{{ url_for('productos') }}" class="btn btn-primary">Ver módulo</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Clientes</h5>
+                <p class="card-text">Administra la información demostrativa de clientes.</p>
+                <a href="{{ url_for('clientes') }}" class="btn btn-primary">Ver módulo</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Proveedores</h5>
+                <p class="card-text">Visualiza la lista de proveedores del sistema.</p>
+                <a href="{{ url_for('proveedores') }}" class="btn btn-primary">Ver módulo</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Facturación</h5>
+                <p class="card-text">Revisa facturas demostrativas generadas en el sistema.</p>
+                <a href="{{ url_for('facturacion') }}" class="btn btn-primary">Ver módulo</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

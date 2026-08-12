@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Productos{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Módulo de Productos</h2>
+<p>Listado demostrativo de productos del sistema.</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>P001</td><td>Martillo</td><td>$8.50</td><td>25</td></tr>
+        <tr><td>P002</td><td>Destornillador</td><td>$4.20</td><td>30</td></tr>
+        <tr><td>P003</td><td>Taladro</td><td>$45.00</td><td>10</td></tr>
+    </tbody>
+</table>
+{% endblock %}
