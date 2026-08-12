@@ -4,45 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Proyecto Integrador{% endblock %}</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-    <header class="bg-dark text-white py-3">
-        <div class="container">
-            <h1 class="m-0">Proyecto Integrador</h1>
-            <p class="m-0">Aplicación web con Python, Flask y Jinja2</p>
+    <!-- ENCABEZADO -->
+    <header class="py-3" style="background-color: var(--primary-color, #1a1a2e); color: white;">
+        <div class="container d-flex align-items-center gap-3">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Proyecto Integrador">
+                <rect width="40" height="40" rx="8" fill="#e94560"/>
+                <text x="8" y="28" font-size="20" font-weight="bold" fill="white" font-family="Arial">PI</text>
+            </svg>
+            <div>
+                <h1 class="m-0 fs-4 fw-bold">Proyecto Integrador</h1>
+                <p class="m-0 small opacity-75">Aplicación web con Python, Flask y Jinja2</p>
+            </div>
         </div>
     </header>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #16213e;">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('inicio') }}">Inicio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="menuNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('inicio') }}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('productos') }}">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('clientes') }}">Clientes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('proveedores') }}">Proveedores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('facturacion') }}">Facturación</a></li>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('inicio') }}">&#127968; Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('productos') }}">&#128230; Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('clientes') }}">&#128101; Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('proveedores') }}">&#128666; Proveedores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('facturacion') }}">&#129534; Facturación</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="container my-5">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-dark text-white text-center py-3">
+    <!-- PIE DE PÁGINA -->
+    <footer class="text-white text-center py-4 mt-auto" style="background-color: #1a1a2e;">
         <div class="container">
-            <p class="mb-0">Proyecto Integrador - Desarrollado con Flask</p>
+            <p class="mb-1">© 2026 Proyecto Integrador &mdash; Desarrollado con Python, Flask y Jinja2</p>
+            <p class="mb-0 small opacity-75">Desarrollo de Aplicaciones Web</p>
         </div>
     </footer>
 

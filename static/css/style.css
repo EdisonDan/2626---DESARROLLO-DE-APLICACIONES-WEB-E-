@@ -1,319 +1,125 @@
-/* =============================================
-   OPEN+ — Estilos personalizados
-   Semana 7 — Bootstrap + CSS3 propio
-   Daniel Garzón — 2026
-   Archivo único: css/style.css
-   ============================================= */
+/* ============================================
+   PROYECTO INTEGRADOR - style.css
+   Mantiene el CSS original del proyecto
+   + estilos complementarios para Flask
+============================================ */
 
-/* --- Variables de diseño --- */
 :root {
-    --color-dark:    #1a1a2e;
-    --color-darker:  #16213e;
-    --color-accent:  #e94560;
-    --color-primary: #0d6efd;
-    --font-body:     'Inter', 'Segoe UI', sans-serif;
-    --transition:    0.2s ease;
-    --radius-card:   12px;
-    --shadow-card:   0 4px 16px rgba(0,0,0,.08);
-    --shadow-hover:  0 8px 24px rgba(0,0,0,.14);
+    --primary-color: #1a1a2e;
+    --secondary-color: #16213e;
+    --accent-color: #e94560;
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --bg-light: #f8f9fa;
 }
 
-/* --- Base --- */
-*,
-*::before,
-*::after { box-sizing: border-box; }
+/* Reset y base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-    font-family: var(--font-body);
-    color: #333;
-    scroll-behavior: smooth;
-}
-
-img { max-width: 100%; height: auto; }
-
-/* --- Utilidad: título de sección --- */
-.section-title {
-    font-weight: 700;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    position: relative;
-    display: inline-block;
-}
-
-.section-title::after {
-    content: '';
-    display: block;
-    width: 48px;
-    height: 4px;
-    background: var(--color-accent);
-    border-radius: 2px;
-    margin: 8px auto 0;
-}
-
-/* =============================================
-   NAVBAR
-   ============================================= */
-header nav.navbar {
-    background-color: var(--color-dark);
-    box-shadow: 0 2px 8px rgba(0,0,0,.3);
-    padding: 0.6rem 0;
-}
-
-.navbar-brand {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #fff !important;
-    letter-spacing: 2px;
-    text-decoration: none;
-}
-
-.navbar-brand span { color: var(--color-accent); }
-
-.nav-link {
-    color: #ccc !important;
-    transition: color var(--transition);
-    font-size: 0.95rem;
-    padding: 0.4rem 0.8rem !important;
-}
-
-.nav-link:hover,
-.nav-link:focus { color: #fff !important; }
-
-/* =============================================
-   SECCIÓN INICIO
-   ============================================= */
-#inicio {
-    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-darker) 100%);
-    color: #fff;
-    padding: clamp(60px, 8vw, 100px) 0;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-}
-
-#inicio h1 {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-#inicio h1 .accent { color: var(--color-accent); }
-
-#inicio .lead {
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    color: #ccc;
-    max-width: 55ch;
-}
-
-.seccion-etiqueta {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.78rem;
-    color: var(--color-accent);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.hero-emoji {
-    font-size: clamp(3rem, 8vw, 5rem);
-    filter: drop-shadow(0 8px 20px rgba(0,0,0,.4));
-}
-
-.btn-accent {
-    background-color: var(--color-accent);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.4rem;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background var(--transition), transform var(--transition);
-}
-
-.btn-accent:hover,
-.btn-accent:focus {
-    background-color: #c73550;
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* =============================================
-   SECCIONES GENERALES
-   ============================================= */
-section {
-    padding: clamp(48px, 6vw, 80px) 0;
-}
-
-section:nth-child(even) { background-color: #f8f9fa; }
-
-/* =============================================
-   STATS (Quiénes Somos)
-   ============================================= */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-}
-
-.stat-card {
-    background: #fff;
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    padding: 20px;
-    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 4px;
 }
 
-.stat-card strong {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    display: block;
+main {
+    flex: 1;
 }
 
-.stat-card span {
-    font-size: 0.85rem;
-    color: #666;
+/* Header */
+header {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-/* =============================================
-   CATÁLOGO
-   ============================================= */
-#catalogo { background-color: #f8f9fa; }
-
-/* Tarjetas de producto */
-.tarjeta-producto {
-    border: none;
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    transition: transform var(--transition), box-shadow var(--transition);
-    overflow: hidden;
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.tarjeta-producto:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-}
-
-.tarjeta-producto .card-emoji {
-    font-size: 2.8rem;
-    display: block;
-    margin-bottom: 8px;
-    line-height: 1;
-}
-
-.tarjeta-producto .card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-top: 4px;
-}
-
-.tarjeta-producto .btn-danger {
+.navbar .nav-link {
     font-weight: 500;
-    transition: opacity var(--transition);
+    transition: color 0.2s, background 0.2s;
     border-radius: 6px;
+    padding: 0.4rem 0.8rem;
 }
 
-.tarjeta-producto .btn-danger:hover { opacity: 0.85; }
-
-/* =============================================
-   SECCIÓN REGISTRAR
-   ============================================= */
-#registrar { background-color: #fff; }
-
-.form-text {
-    font-size: 0.82rem;
-    min-height: 1.2em;
+.navbar .nav-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: #fff !important;
 }
 
-#alertaExito { border-left: 4px solid #198754; }
-
-/* =============================================
-   TABLA REGISTROS
-   ============================================= */
-#tabla-registros { background-color: #f8f9fa; }
-
-#tabla-registros .table thead {
-    background-color: var(--color-dark);
-    color: #fff;
-}
-
-#tabla-registros .table thead th { border: none; }
-
-/* =============================================
-   SECCIÓN VIDEO
-   ============================================= */
-#video { background-color: #fff; }
-
-#video .ratio {
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
-}
-
-/* =============================================
-   SECCIÓN CONTACTO — ASIDE
-   ============================================= */
-.info-aside {
-    background: #f8f9fa;
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
-    height: 100%;
-}
-
-.info-aside h5 { font-weight: 700; color: var(--color-dark); }
-
-/* =============================================
-   FOOTER
-   ============================================= */
+/* Footer */
 footer {
-    background-color: var(--color-dark);
-    color: #aaa;
-    padding: 24px 0;
-    font-size: 0.88rem;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
 }
 
-.footer-sub { font-size: 0.78rem; color: #666; margin-top: 4px; }
+/* Tarjetas */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 10px;
+}
 
-/* =============================================
-   RESPONSIVE — tablet (≤768px)
-   ============================================= */
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+}
+
+/* Tablas */
+.table thead th {
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+}
+
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+/* Botones */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: #c73652;
+    border-color: #c73652;
+}
+
+/* Page header en modulos */
+.page-header {
+    border-left: 4px solid var(--accent-color);
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    #inicio { min-height: auto; }
-    .hero-emoji { font-size: 3rem; }
-}
-
-/* =============================================
-   RESPONSIVE — móvil (≤576px)
-   ============================================= */
-@media (max-width: 576px) {
-    #inicio {
-        padding: 50px 0;
-        text-align: center;
+    header h1 {
+        font-size: 1.2rem;
     }
-    #inicio .lead { margin-inline: auto; }
-    #inicio .d-flex { justify-content: center; }
-    .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .stat-card strong { font-size: 1.4rem; }
-    .section-title { font-size: 1.3rem; }
-    .info-aside { margin-top: 16px; }
-}
-
-/* =============================================
-   RESPONSIVE — extra pequeño (≤400px)
-   ============================================= */
-@media (max-width: 400px) {
-    .navbar-brand { font-size: 1.3rem; letter-spacing: 1px; }
-    #inicio h1 { font-size: 1.5rem; }
-    .stats-grid { grid-template-columns: 1fr; }
-}
-
-/* =============================================
-   MODAL — Semana 8
-   ============================================= */
-.modal-emoji {
-    font-size: 4rem;
-    line-height: 1;
-    display: block;
+    .table-responsive {
+        font-size: 0.85rem;
+    }
 }

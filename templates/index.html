@@ -1,55 +1,63 @@
 {% extends "base.html" %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Inicio - Proyecto Integrador{% endblock %}
 
 {% block content %}
-<div class="text-center">
-    <h2>Bienvenido al Proyecto Integrador</h2>
-    <p class="lead">
-        Esta es la página principal informativa del sistema. Desde aquí puedes acceder a los módulos
-        de productos, clientes, proveedores y facturación.
+<div class="text-center mb-5">
+    <h2 class="fw-bold display-5">Bienvenido al Proyecto Integrador</h2>
+    <p class="lead text-muted">
+        Sistema de gestión desarrollado con Python, Flask y Jinja2. Navega por los módulos del sistema.
     </p>
+    <hr class="my-4">
 </div>
 
-<div class="row mt-5">
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Productos</h5>
-                <p class="card-text">Consulta el catálogo de productos disponibles en el sistema.</p>
-                <a href="{{ url_for('productos') }}" class="btn btn-primary">Ver módulo</a>
+<div class="row g-4">
+    <div class="col-sm-6 col-lg-3">
+        <div class="card h-100 shadow border-0">
+            <div class="card-body text-center py-4">
+                <div class="fs-1 mb-3">&#128230;</div>
+                <h5 class="card-title fw-bold">Productos</h5>
+                <p class="card-text text-muted small">Catálogo de productos disponibles en el sistema.</p>
+                <a href="{{ url_for('productos') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Clientes</h5>
-                <p class="card-text">Administra la información demostrativa de clientes.</p>
-                <a href="{{ url_for('clientes') }}" class="btn btn-primary">Ver módulo</a>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card h-100 shadow border-0">
+            <div class="card-body text-center py-4">
+                <div class="fs-1 mb-3">&#128101;</div>
+                <h5 class="card-title fw-bold">Clientes</h5>
+                <p class="card-text text-muted small">Información demostrativa de clientes registrados.</p>
+                <a href="{{ url_for('clientes') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Proveedores</h5>
-                <p class="card-text">Visualiza la lista de proveedores del sistema.</p>
-                <a href="{{ url_for('proveedores') }}" class="btn btn-primary">Ver módulo</a>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card h-100 shadow border-0">
+            <div class="card-body text-center py-4">
+                <div class="fs-1 mb-3">&#128666;</div>
+                <h5 class="card-title fw-bold">Proveedores</h5>
+                <p class="card-text text-muted small">Lista de proveedores del sistema.</p>
+                <a href="{{ url_for('proveedores') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
             </div>
         </div>
     </div>
 
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Facturación</h5>
-                <p class="card-text">Revisa facturas demostrativas generadas en el sistema.</p>
-                <a href="{{ url_for('facturacion') }}" class="btn btn-primary">Ver módulo</a>
+    <div class="col-sm-6 col-lg-3">
+        <div class="card h-100 shadow border-0">
+            <div class="card-body text-center py-4">
+                <div class="fs-1 mb-3">&#129534;</div>
+                <h5 class="card-title fw-bold">Facturación</h5>
+                <p class="card-text text-muted small">Facturas demostrativas generadas en el sistema.</p>
+                <a href="{{ url_for('facturacion') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
             </div>
         </div>
     </div>
+</div>
+
+<div class="alert alert-info mt-5" role="alert">
+    <strong>Nota:</strong> Los datos presentados en los módulos son demostrativos. No se requiere conexión a base de datos en esta etapa.
 </div>
 {% endblock %}

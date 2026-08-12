@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Facturación - Proyecto Integrador{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">&#129534; Módulo de Facturación</h2>
+    <span class="badge bg-primary fs-6">{{ facturas|length }} facturas</span>
+</div>
+<p class="text-muted">Listado demostrativo de facturas generadas en el sistema.</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-success">
+            <tr>
+                <th>Número</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Subtotal</th>
+                <th>IVA (15%)</th>
+                <th>Total</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in facturas %}
+            <tr>
+                <td><code>{{ f.numero }}</code></td>
+                <td class="fw-semibold">{{ f.cliente }}</td>
+                <td>{{ f.fecha }}</td>
+                <td>${{ "%.2f"|format(f.subtotal) }}</td>
+                <td>${{ "%.2f"|format(f.subtotal * 0.15) }}</td>
+                <td class="fw-bold">${{ "%.2f"|format(f.subtotal * 1.15) }}</td>
+                <td>
+                    {% if f.estado == 'Pagada' %}
+                        <span class="badge bg-success">Pagada</span>
+                    {% elif f.estado == 'Pendiente' %}
+                        <span class="badge bg-warning text-dark">Pendiente</span>
+                    {% else %}
+                        <span class="badge bg-danger">Anulada</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Proveedores - Proyecto Integrador{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">&#128666; Módulo de Proveedores</h2>
+    <span class="badge bg-primary fs-6">{{ proveedores|length }} proveedores</span>
+</div>
+<p class="text-muted">Listado demostrativo de proveedores registrados en el sistema.</p>
+
+<div class="row g-4">
+    {% for prov in proveedores %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-header fw-bold" style="background-color: #16213e; color: white;">
+                &#127970; {{ prov.nombre }}
+            </div>
+            <div class="card-body">
+                <p class="card-text text-muted small mb-2">{{ prov.descripcion }}</p>
+                <ul class="list-unstyled small mb-0">
+                    <li><strong>RUC:</strong> {{ prov.ruc }}</li>
+                    <li><strong>Teléfono:</strong> {{ prov.telefono }}</li>
+                    <li><strong>Ciudad:</strong> {{ prov.ciudad }}</li>
+                    <li><strong>Categoría:</strong>
+                        <span class="badge bg-info text-dark">{{ prov.categoria }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

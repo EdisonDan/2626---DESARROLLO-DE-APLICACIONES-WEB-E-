@@ -1,24 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Clientes{% endblock %}
+{% block title %}Clientes - Proyecto Integrador{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Módulo de Clientes</h2>
-<p>Listado demostrativo de clientes registrados.</p>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">&#128101; Módulo de Clientes</h2>
+    <span class="badge bg-primary fs-6">{{ clientes|length }} clientes</span>
+</div>
+<p class="text-muted">Listado demostrativo de clientes registrados en el sistema.</p>
 
-<table class="table table-bordered table-hover">
-    <thead class="table-primary">
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Cédula</th>
-            <th>Teléfono</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Juan Pérez</td><td>1723456789</td><td>0991234567</td></tr>
-        <tr><td>2</td><td>María López</td><td>1712345678</td><td>0987654321</td></tr>
-        <tr><td>3</td><td>Carlos Ruiz</td><td>1709876543</td><td>0974561230</td></tr>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in clientes %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td class="fw-semibold">{{ c.nombre }}</td>
+                <td><code>{{ c.cedula }}</code></td>
+                <td>{{ c.telefono }}</td>
+                <td>{{ c.ciudad }}</td>
+                <td>
+                    {% if c.tipo == 'VIP' %}
+                        <span class="badge bg-warning text-dark">VIP</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Regular</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
