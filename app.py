@@ -1,8 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, flash
+from forms.producto_form import ProductoForm
+from forms.cliente_form import ClienteForm
+from forms.proveedor_form import ProveedorForm
+from forms.facturacion_form import FacturacionForm
 
 app = Flask(__name__)
-
-# --- Datos demostrativos ---
+app.config["SECRET_KEY"] = "cambia-esta-clave-en-produccion"
 
 productos_data = [
     {"codigo": "P001", "nombre": "Martillo", "categoria": "Herramientas", "precio": 8.50, "stock": 25},
@@ -24,7 +27,7 @@ clientes_data = [
 proveedores_data = [
     {"nombre": "Proveedor Andino", "ruc": "1790012345001", "descripcion": "Suministro de herramientas y materiales de construcción.", "telefono": "022345678", "ciudad": "Quito", "categoria": "Herramientas"},
     {"nombre": "Distribuidora Quito", "ruc": "1790023456001", "descripcion": "Proveedor de equipos eléctricos y cableado.", "telefono": "023456789", "ciudad": "Quito", "categoria": "Eléctricos"},
-    {"nombre": "Comercial Centro", "ruc": "1790034567001", "descripcion": "Materiales para construcción y ferreteriía general.", "telefono": "024567890", "ciudad": "Guayaquil", "categoria": "Construcción"},
+    {"nombre": "Comercial Centro", "ruc": "1790034567001", "descripcion": "Materiales para construcción y ferretería general.", "telefono": "024567890", "ciudad": "Guayaquil", "categoria": "Construcción"},
     {"nombre": "Pinturas del Ecuador", "ruc": "1790045678001", "descripcion": "Distribuidor oficial de pinturas y recubrimientos.", "telefono": "022678901", "ciudad": "Cuenca", "categoria": "Pintura"},
 ]
 
@@ -36,8 +39,6 @@ facturas_data = [
     {"numero": "F-005", "cliente": "Luis Mora", "fecha": "09/08/2026", "subtotal": 34.00, "estado": "Anulada"},
 ]
 
-# --- Rutas ---
-
 @app.route("/")
 def inicio():
     return render_template("index.html")
@@ -46,17 +47,53 @@ def inicio():
 def productos():
     return render_template("productos.html", productos=productos_data)
 
+@app.route("/productos/nuevo", methods=["GET", "POST"])
+def nuevo_producto():
+    form = ProductoForm()
+    if form.validate_on_submit():
+        productos_data.append({"codigo": form.codigo.data, "nombre": form.nombre.data, "categoria": form.categoria.data, "precio": form.precio.data, "stock": form.stock.data})
+        flash("Producto registrado correctamente.", "success")
+        return redirect(url_for("productos"))
+    return render_template("formulario_producto.html", form=form, titulo="Registrar producto")
+
 @app.route("/clientes")
 def clientes():
     return render_template("clientes.html", clientes=clientes_data)
+
+@app.route("/clientes/nuevo", methods=["GET", "POST"])
+def nuevo_cliente():
+    form = ClienteForm()
+    if form.validate_on_submit():
+        clientes_data.append({"id": len(clientes_data) + 1, "nombre": form.nombre.data, "cedula": form.cedula.data, "telefono": form.telefono.data, "ciudad": form.ciudad.data, "tipo": "Regular"})
+        flash("Cliente registrado correctamente.", "success")
+        return redirect(url_for("clientes"))
+    return render_template("formulario_cliente.html", form=form, titulo="Registrar cliente")
 
 @app.route("/proveedores")
 def proveedores():
     return render_template("proveedores.html", proveedores=proveedores_data)
 
+@app.route("/proveedores/nuevo", methods=["GET", "POST"])
+def nuevo_proveedor():
+    form = ProveedorForm()
+    if form.validate_on_submit():
+        proveedores_data.append({"nombre": form.nombre.data, "ruc": form.ruc.data, "descripcion": form.descripcion.data, "telefono": form.telefono.data, "ciudad": form.ciudad.data, "categoria": form.categoria.data})
+        flash("Proveedor registrado correctamente.", "success")
+        return redirect(url_for("proveedores"))
+    return render_template("formulario_proveedor.html", form=form, titulo="Registrar proveedor")
+
 @app.route("/facturacion")
 def facturacion():
     return render_template("facturacion.html", facturas=facturas_data)
+
+@app.route("/facturacion/nueva", methods=["GET", "POST"])
+def nueva_factura():
+    form = FacturacionForm()
+    if form.validate_on_submit():
+        facturas_data.append({"numero": form.numero.data, "cliente": form.cliente.data, "fecha": form.fecha.data.strftime("%d/%m/%Y"), "subtotal": form.subtotal.data, "estado": form.estado.data})
+        flash("Factura registrada correctamente.", "success")
+        return redirect(url_for("facturacion"))
+    return render_template("formulario_facturacion.html", form=form, titulo="Registrar factura")
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-lg-8">
+<h2 class="mb-4">{{ titulo }}</h2>
+<form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    {% for campo in [form.numero, form.cliente, form.fecha, form.subtotal, form.estado] %}
+    <div class="mb-3">
+        {{ campo.label(class="form-label") }}
+        {% if campo.name == "fecha" %}{{ campo(class="form-control", type="date") }}{% else %}{{ campo(class="form-control") }}{% endif %}
+        {% for error in campo.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+    </div>
+    {% endfor %}
+    {{ form.submit(class="btn btn-primary") }}
+    <a href="{{ url_for('facturacion') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+</div></div>
+{% endblock %}
