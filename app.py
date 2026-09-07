@@ -100,8 +100,8 @@ def nuevo_producto():
                     form.codigo.data,
                     form.nombre.data,
                     form.categoria.data,
-                    form.precio.data,
-                    form.stock.data,
+                    float(form.precio.data),
+                    int(form.stock.data),
                 ),
             )
             conn.commit()
