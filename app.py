@@ -13,10 +13,9 @@ app.config["SECRET_KEY"] = "cambia-esta-clave-en-produccion"
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
-DATABASE = DATA_DIR / "ferreteria.db"
+DATABASE = DATA_DIR / "tienda_perifericos.db"
 
 
-# --- Persistencia SQLite para productos ---
 def get_db_connection():
     DATA_DIR.mkdir(exist_ok=True)
     conn = sqlite3.connect(DATABASE)
@@ -44,7 +43,6 @@ def init_db():
 
 init_db()
 
-# --- Datos demostrativos de los módulos que se integrarán progresivamente ---
 clientes_data = [
     {"id": 1, "nombre": "Juan Pérez", "cedula": "1723456789", "telefono": "0991234567", "ciudad": "Quito", "tipo": "VIP"},
     {"id": 2, "nombre": "María López", "cedula": "1712345678", "telefono": "0987654321", "ciudad": "Guayaquil", "tipo": "Regular"},
@@ -54,10 +52,10 @@ clientes_data = [
 ]
 
 proveedores_data = [
-    {"nombre": "Proveedor Andino", "ruc": "1790012345001", "descripcion": "Suministro de herramientas y materiales de construcción.", "telefono": "022345678", "ciudad": "Quito", "categoria": "Herramientas"},
-    {"nombre": "Distribuidora Quito", "ruc": "1790023456001", "descripcion": "Proveedor de equipos eléctricos y cableado.", "telefono": "023456789", "ciudad": "Quito", "categoria": "Eléctricos"},
-    {"nombre": "Comercial Centro", "ruc": "1790034567001", "descripcion": "Materiales para construcción y ferretería general.", "telefono": "024567890", "ciudad": "Guayaquil", "categoria": "Construcción"},
-    {"nombre": "Pinturas del Ecuador", "ruc": "1790045678001", "descripcion": "Distribuidor oficial de pinturas y recubrimientos.", "telefono": "022678901", "ciudad": "Cuenca", "categoria": "Pintura"},
+    {"nombre": "TechImport Ecuador", "ruc": "1790012345001", "descripcion": "Distribuidor de teclados, mouse y accesorios para computadora.", "telefono": "022345678", "ciudad": "Quito", "categoria": "Periféricos"},
+    {"nombre": "Gaming Supply", "ruc": "1790023456001", "descripcion": "Proveedor de productos gaming y accesorios para jugadores.", "telefono": "023456789", "ciudad": "Quito", "categoria": "Gaming"},
+    {"nombre": "Digital Store Mayorista", "ruc": "1790034567001", "descripcion": "Distribuidor de audio, conectividad y accesorios tecnológicos.", "telefono": "024567890", "ciudad": "Guayaquil", "categoria": "Tecnología"},
+    {"nombre": "Componentes Andinos", "ruc": "1790045678001", "descripcion": "Proveedor de webcams, micrófonos y dispositivos para oficina.", "telefono": "022678901", "ciudad": "Cuenca", "categoria": "Oficina"},
 ]
 
 facturas_data = [
@@ -105,18 +103,14 @@ def nuevo_producto():
                 ),
             )
             conn.commit()
-            flash("Producto registrado correctamente en SQLite.", "success")
+            flash("Periférico registrado correctamente en SQLite.", "success")
             return redirect(url_for("productos"))
         except sqlite3.IntegrityError:
-            form.codigo.errors.append("Ya existe un producto con ese código.")
+            form.codigo.errors.append("Ya existe un periférico con ese código.")
         finally:
             conn.close()
 
-    return render_template(
-        "formulario_producto.html",
-        form=form,
-        titulo="Registrar producto",
-    )
+    return render_template("formulario_producto.html", form=form, titulo="Registrar periférico")
 
 
 @app.route("/clientes")
@@ -128,14 +122,7 @@ def clientes():
 def nuevo_cliente():
     form = ClienteForm()
     if form.validate_on_submit():
-        clientes_data.append({
-            "id": len(clientes_data) + 1,
-            "nombre": form.nombre.data,
-            "cedula": form.cedula.data,
-            "telefono": form.telefono.data,
-            "ciudad": form.ciudad.data,
-            "tipo": "Regular",
-        })
+        clientes_data.append({"id": len(clientes_data) + 1, "nombre": form.nombre.data, "cedula": form.cedula.data, "telefono": form.telefono.data, "ciudad": form.ciudad.data, "tipo": "Regular"})
         flash("Cliente registrado correctamente.", "success")
         return redirect(url_for("clientes"))
     return render_template("formulario_cliente.html", form=form, titulo="Registrar cliente")
@@ -150,14 +137,7 @@ def proveedores():
 def nuevo_proveedor():
     form = ProveedorForm()
     if form.validate_on_submit():
-        proveedores_data.append({
-            "nombre": form.nombre.data,
-            "ruc": form.ruc.data,
-            "descripcion": form.descripcion.data,
-            "telefono": form.telefono.data,
-            "ciudad": form.ciudad.data,
-            "categoria": form.categoria.data,
-        })
+        proveedores_data.append({"nombre": form.nombre.data, "ruc": form.ruc.data, "descripcion": form.descripcion.data, "telefono": form.telefono.data, "ciudad": form.ciudad.data, "categoria": form.categoria.data})
         flash("Proveedor registrado correctamente.", "success")
         return redirect(url_for("proveedores"))
     return render_template("formulario_proveedor.html", form=form, titulo="Registrar proveedor")
@@ -172,13 +152,7 @@ def facturacion():
 def nueva_factura():
     form = FacturacionForm()
     if form.validate_on_submit():
-        facturas_data.append({
-            "numero": form.numero.data,
-            "cliente": form.cliente.data,
-            "fecha": form.fecha.data.strftime("%d/%m/%Y"),
-            "subtotal": form.subtotal.data,
-            "estado": form.estado.data,
-        })
+        facturas_data.append({"numero": form.numero.data, "cliente": form.cliente.data, "fecha": form.fecha.data.strftime("%d/%m/%Y"), "subtotal": form.subtotal.data, "estado": form.estado.data})
         flash("Factura registrada correctamente.", "success")
         return redirect(url_for("facturacion"))
     return render_template("formulario_facturacion.html", form=form, titulo="Registrar factura")

@@ -1,4 +1,8 @@
-# Proyecto Integrador: Flask + SQLite
+# Tienda Nova — Proyecto Integrador
+
+Aplicación Flask para administrar una tienda de periféricos, accesorios gaming y tecnología.
+
+La aplicación utiliza Flask-WTF, validación CSRF, SQLite y plantillas Jinja2. La base local se crea automáticamente en `data/tienda_perifericos.db`.
 
 ## Ejecutar localmente
 
@@ -11,12 +15,12 @@ python app.py
 
 Abre http://127.0.0.1:5000/.
 
-La base de datos SQLite se crea automáticamente en `data/ferreteria.db` al iniciar la aplicación. El módulo de productos utiliza el flujo formulario Flask-WTF -> validación -> INSERT parametrizado -> SELECT -> tabla Jinja2.
-
 ## Rutas principales
 
-- `/productos` — consulta los productos almacenados en SQLite.
-- `/productos/nuevo` — formulario GET/POST para registrar productos.
-- `/clientes`, `/clientes/nuevo` — módulo demostrativo de clientes.
-- `/proveedores`, `/proveedores/nuevo` — módulo demostrativo de proveedores.
-- `/facturacion`, `/facturacion/nueva` — módulo demostrativo de facturación.
+- `/productos` — catálogo de periféricos almacenados en SQLite.
+- `/productos/nuevo` — formulario GET/POST para registrar periféricos.
+- `/clientes`, `/clientes/nuevo` — módulo de clientes.
+- `/proveedores`, `/proveedores/nuevo` — módulo de proveedores tecnológicos.
+- `/facturacion`, `/facturacion/nueva` — módulo de facturación.
+
+La base de datos debe probarse localmente; GitHub Pages conserva únicamente la parte estática del proyecto.

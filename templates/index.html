@@ -1,63 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Inicio - Proyecto Integrador{% endblock %}
+{% block title %}Inicio - Tienda Nova{% endblock %}
 
 {% block content %}
 <div class="text-center mb-5">
-    <h2 class="fw-bold display-5">Bienvenido al Proyecto Integrador</h2>
-    <p class="lead text-muted">
-        Sistema de gestión desarrollado con Python, Flask y Jinja2. Navega por los módulos del sistema.
-    </p>
+    <h2 class="fw-bold display-5">Bienvenido a Tienda Nova</h2>
+    <p class="lead text-muted">Tienda especializada en periféricos, accesorios gaming y tecnología para tu espacio digital.</p>
     <hr class="my-4">
 </div>
 
 <div class="row g-4">
-    <div class="col-sm-6 col-lg-3">
-        <div class="card h-100 shadow border-0">
-            <div class="card-body text-center py-4">
-                <div class="fs-1 mb-3">&#128230;</div>
-                <h5 class="card-title fw-bold">Productos</h5>
-                <p class="card-text text-muted small">Catálogo de productos disponibles en el sistema.</p>
-                <a href="{{ url_for('productos') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card h-100 shadow border-0">
-            <div class="card-body text-center py-4">
-                <div class="fs-1 mb-3">&#128101;</div>
-                <h5 class="card-title fw-bold">Clientes</h5>
-                <p class="card-text text-muted small">Información demostrativa de clientes registrados.</p>
-                <a href="{{ url_for('clientes') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card h-100 shadow border-0">
-            <div class="card-body text-center py-4">
-                <div class="fs-1 mb-3">&#128666;</div>
-                <h5 class="card-title fw-bold">Proveedores</h5>
-                <p class="card-text text-muted small">Lista de proveedores del sistema.</p>
-                <a href="{{ url_for('proveedores') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-3">
-        <div class="card h-100 shadow border-0">
-            <div class="card-body text-center py-4">
-                <div class="fs-1 mb-3">&#129534;</div>
-                <h5 class="card-title fw-bold">Facturación</h5>
-                <p class="card-text text-muted small">Facturas demostrativas generadas en el sistema.</p>
-                <a href="{{ url_for('facturacion') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a>
-            </div>
-        </div>
-    </div>
+    <div class="col-sm-6 col-lg-3"><div class="card h-100 shadow border-0"><div class="card-body text-center py-4"><div class="fs-1 mb-3">&#128230;</div><h5 class="card-title fw-bold">Periféricos</h5><p class="card-text text-muted small">Teclados, mouse, audífonos, webcams y accesorios.</p><a href="{{ url_for('productos') }}" class="btn btn-primary btn-sm mt-2">Ver catálogo</a></div></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="card h-100 shadow border-0"><div class="card-body text-center py-4"><div class="fs-1 mb-3">&#128101;</div><h5 class="card-title fw-bold">Clientes</h5><p class="card-text text-muted small">Información de clientes de Tienda Nova.</p><a href="{{ url_for('clientes') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a></div></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="card h-100 shadow border-0"><div class="card-body text-center py-4"><div class="fs-1 mb-3">&#128666;</div><h5 class="card-title fw-bold">Proveedores</h5><p class="card-text text-muted small">Distribuidores de tecnología y periféricos.</p><a href="{{ url_for('proveedores') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a></div></div></div>
+    <div class="col-sm-6 col-lg-3"><div class="card h-100 shadow border-0"><div class="card-body text-center py-4"><div class="fs-1 mb-3">&#129534;</div><h5 class="card-title fw-bold">Facturación</h5><p class="card-text text-muted small">Control de ventas y facturas de la tienda.</p><a href="{{ url_for('facturacion') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a></div></div></div>
 </div>
 
-<div class="alert alert-info mt-5" role="alert">
-    <strong>Nota:</strong> Los datos presentados en los módulos son demostrativos. No se requiere conexión a base de datos en esta etapa.
-</div>
+<div class="alert alert-info mt-5" role="alert"><strong>Tienda Nova:</strong> registra y consulta tus periféricos con persistencia local en SQLite.</div>
 {% endblock %}
