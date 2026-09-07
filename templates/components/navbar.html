@@ -1,1 +1,17 @@
-{% include "components/navbar.html" %}
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #16213e;">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('inicio') }}">Proyecto Integrador</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Abrir navegación">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menuNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('inicio') }}">&#127968; Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('productos') }}">&#128230; Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('clientes') }}">&#128101; Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('proveedores') }}">&#128666; Proveedores</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('facturacion') }}">&#129534; Facturación</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
