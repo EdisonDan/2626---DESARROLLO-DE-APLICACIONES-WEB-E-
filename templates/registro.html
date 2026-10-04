@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "components/macros.html" import campo %}
+{% block title %}Crear cuenta - Tienda Nova{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6 col-lg-5">
+<div class="card shadow border-0"><div class="card-body p-4">
+<h2 class="fw-bold mb-1">&#128221; Crear cuenta</h2>
+<p class="text-muted">La contraseña se guarda protegida con hash.</p>
+<form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    {{ campo(form.usuario) }}{{ campo(form.password) }}{{ campo(form.confirmar) }}
+    {{ form.submit(class="btn btn-primary w-100") }}
+</form>
+<p class="small text-center mt-3 mb-0">¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a></p>
+</div></div>
+</div></div>
+{% endblock %}

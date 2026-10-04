@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "components/macros.html" import campo %}
+{% block title %}Iniciar sesión - Tienda Nova{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6 col-lg-5">
+<div class="card shadow border-0"><div class="card-body p-4">
+<h2 class="fw-bold mb-1">&#128274; Iniciar sesión</h2>
+<p class="text-muted">Ingresa para administrar Tienda Nova.</p>
+<form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    {{ campo(form.usuario) }}{{ campo(form.password) }}
+    {{ form.submit(class="btn btn-primary w-100") }}
+</form>
+<p class="small text-center mt-3 mb-0">¿No tienes cuenta? <a href="{{ url_for('registro') }}">Regístrate</a></p>
+</div></div>
+</div></div>
+{% endblock %}

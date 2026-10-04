@@ -1,0 +1,22 @@
+# Blueprint de Render: crea la base PostgreSQL y el servicio web conectados entre sí.
+databases:
+  - name: tienda-nova-db
+    plan: free
+    databaseName: tienda_nova
+
+services:
+  - type: web
+    name: tienda-nova
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tienda-nova-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.12.3

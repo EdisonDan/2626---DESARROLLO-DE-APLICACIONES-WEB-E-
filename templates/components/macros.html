@@ -1,0 +1,25 @@
+{# Macros reutilizables: campos de formulario y botones de acción #}
+{% macro campo(c) %}
+<div class="mb-3">
+    {{ c.label(class="form-label") }}
+    {{ c(class="form-control" ~ (" is-invalid" if c.errors else "")) }}
+    {% for error in c.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+</div>
+{% endmacro %}
+
+{% macro campo_select(c) %}
+<div class="mb-3">
+    {{ c.label(class="form-label") }}
+    {{ c(class="form-select" ~ (" is-invalid" if c.errors else "")) }}
+    {% for error in c.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+</div>
+{% endmacro %}
+
+{% macro acciones(url_editar, url_eliminar, nombre) %}
+<td class="text-nowrap">
+    <a href="{{ url_editar }}" class="btn btn-sm btn-outline-primary">Editar</a>
+    <button type="button" class="btn btn-sm btn-outline-danger btn-eliminar"
+            data-bs-toggle="modal" data-bs-target="#modalEliminar"
+            data-action="{{ url_eliminar }}" data-nombre="{{ nombre }}">Eliminar</button>
+</td>
+{% endmacro %}

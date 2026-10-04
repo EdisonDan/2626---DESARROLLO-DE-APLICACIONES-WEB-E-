@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, NumberRange
 
 class FacturacionForm(FlaskForm):
     numero = StringField("Número de factura", validators=[DataRequired(message="El número de factura es obligatorio.")])
-    cliente = StringField("Cliente", validators=[DataRequired(message="El cliente es obligatorio.")])
+    id_cliente = SelectField("Cliente", coerce=int, validators=[DataRequired(message="Seleccione un cliente.")])
     fecha = DateField("Fecha", format="%Y-%m-%d", validators=[DataRequired(message="La fecha es obligatoria.")])
     subtotal = DecimalField("Subtotal", places=2, validators=[
         DataRequired(message="El subtotal es obligatorio."),

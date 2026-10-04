@@ -34,4 +34,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 100);
     });
 
+    // Modal de confirmación antes de eliminar un registro
+    const modalEliminar = document.getElementById('modalEliminar');
+    if (modalEliminar) {
+        modalEliminar.addEventListener('show.bs.modal', function (event) {
+            const boton = event.relatedTarget;
+            document.getElementById('formEliminar').action = boton.dataset.action;
+            document.getElementById('modalEliminarNombre').textContent = boton.dataset.nombre;
+        });
+    }
+
 });

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Proveedores - Proyecto Integrador{% endblock %}
+{% from "components/macros.html" import acciones %}
+{% block title %}Proveedores - Tienda Nova{% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4"><h2 class="fw-bold">&#128666; Módulo de Proveedores</h2><div><span class="badge bg-primary fs-6">{{ proveedores|length }} proveedores</span><a href="{{ url_for('nuevo_proveedor') }}" class="btn btn-primary ms-2">Nuevo proveedor</a></div></div>
-<p class="text-muted">Listado demostrativo de proveedores registrados en el sistema.</p>
-<div class="row g-4">{% for prov in proveedores %}<div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm border-0"><div class="card-header fw-bold" style="background-color:#16213e;color:white;">&#127970; {{ prov.nombre }}</div><div class="card-body"><p class="card-text text-muted small mb-2">{{ prov.descripcion }}</p><ul class="list-unstyled small mb-0"><li><strong>RUC:</strong> {{ prov.ruc }}</li><li><strong>Teléfono:</strong> {{ prov.telefono }}</li><li><strong>Ciudad:</strong> {{ prov.ciudad }}</li><li><strong>Categoría:</strong> <span class="badge bg-info text-dark">{{ prov.categoria }}</span></li></ul></div></div></div>{% endfor %}</div>
+{% if proveedores %}
+<div class="table-responsive"><table class="table table-bordered table-hover align-middle"><thead class="table-primary"><tr><th>ID</th><th>Proveedor</th><th>RUC</th><th>Descripción</th><th>Teléfono</th><th>Ciudad</th><th>Categoría</th><th>Productos</th><th>Acciones</th></tr></thead><tbody>
+{% for p in proveedores %}<tr><td>{{ p.id_proveedor }}</td><td class="fw-semibold">{{ p.nombre }}</td><td><code>{{ p.ruc }}</code></td><td class="small">{{ p.descripcion }}</td><td>{{ p.telefono }}</td><td>{{ p.ciudad }}</td><td>{{ p.categoria }}</td><td><span class="badge bg-secondary">{{ p.productos }}</span></td>{{ acciones(url_for('editar_proveedor', id_proveedor=p.id_proveedor), url_for('eliminar_proveedor', id_proveedor=p.id_proveedor), p.nombre) }}</tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="alert alert-info">No hay proveedores registrados.</div>{% endif %}
 {% endblock %}

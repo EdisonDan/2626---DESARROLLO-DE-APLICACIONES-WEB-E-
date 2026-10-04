@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Panel - Tienda Nova{% endblock %}
+{% block content %}
+<h2 class="fw-bold mb-1">&#128202; Panel de administración</h2>
+<p class="text-muted mb-4">Sesión activa: <strong>{{ current_user.usuario }}</strong></p>
+<div class="row g-4">
+    {% for icono, titulo, total, destino in [
+        ("&#127918;", "Periféricos", resumen.productos, "productos"),
+        ("&#128101;", "Clientes", resumen.clientes, "clientes"),
+        ("&#128666;", "Proveedores", resumen.proveedores, "proveedores"),
+        ("&#129534;", "Facturas", resumen.facturas, "facturacion")] %}
+    <div class="col-sm-6 col-lg-3"><div class="card h-100 shadow border-0"><div class="card-body text-center py-4">
+        <div class="fs-1 mb-2">{{ icono|safe }}</div><h5 class="fw-bold">{{ titulo }}</h5>
+        <p class="display-6 mb-2">{{ total }}</p>
+        <a href="{{ url_for(destino) }}" class="btn btn-primary btn-sm">Administrar</a>
+    </div></div></div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -16,5 +16,5 @@
     <div class="col-sm-6 col-lg-3"><div class="card h-100 shadow border-0"><div class="card-body text-center py-4"><div class="fs-1 mb-3">&#129534;</div><h5 class="card-title fw-bold">Facturación</h5><p class="card-text text-muted small">Control de ventas y facturas de la tienda.</p><a href="{{ url_for('facturacion') }}" class="btn btn-primary btn-sm mt-2">Ver módulo</a></div></div></div>
 </div>
 
-<div class="alert alert-info mt-5" role="alert"><strong>Tienda Nova:</strong> registra y consulta tus periféricos con persistencia local en SQLite.</div>
+<div class="alert alert-info mt-5" role="alert"><strong>Tienda Nova:</strong> administra periféricos, clientes, proveedores y facturas sobre PostgreSQL. {% if current_user.is_authenticated %}Sesión iniciada como <strong>{{ current_user.usuario }}</strong>.{% else %}<a href="{{ url_for('login') }}">Inicia sesión</a> para acceder a los módulos.{% endif %}</div>
 {% endblock %}
