@@ -1,0 +1,87 @@
+/* OPEN+ — sitio estático (GitHub Pages) */
+:root{--color-dark:#1a1a2e;--color-mid:#16213e;--color-accent:#e94560;--color-soft:#f5f6fb;--color-text:#2b2d42;
+--bs-primary:#e94560;--bs-primary-rgb:233,69,96;--bs-link-color:#e94560;--bs-link-hover-color:#c93550}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--color-text);background:#fff}
+section{padding:5rem 0}
+main>section:nth-of-type(even){background:var(--color-soft)}
+
+/* Navbar */
+header{position:sticky;top:0;z-index:1030}
+.navbar{background:rgba(26,26,46,.92);backdrop-filter:blur(10px);box-shadow:0 2px 16px rgba(0,0,0,.25)}
+.navbar-brand{color:#fff!important;font-weight:700;font-size:1.35rem;letter-spacing:.5px}
+.navbar-brand span{color:var(--color-accent)}
+.navbar .nav-link{color:rgba(255,255,255,.8);font-weight:500;border-radius:8px;padding:.45rem .9rem!important;transition:.2s}
+.navbar .nav-link:hover{color:#fff;background:rgba(255,255,255,.1)}
+.navbar-toggler{border-color:rgba(255,255,255,.4)}
+
+/* Hero */
+#inicio{position:relative;overflow:hidden;color:#fff;padding:7rem 0 6rem;
+background:radial-gradient(circle at 85% 20%,rgba(233,69,96,.35),transparent 45%),radial-gradient(circle at 10% 90%,rgba(83,120,255,.25),transparent 40%),linear-gradient(135deg,var(--color-dark),var(--color-mid))}
+#inicio h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;line-height:1.1}
+#inicio .lead{color:rgba(255,255,255,.8);max-width:34rem}
+.accent{color:var(--color-accent)}
+.seccion-etiqueta{display:inline-block;background:rgba(233,69,96,.18);color:#ff8fa3;border:1px solid rgba(233,69,96,.4);
+padding:.35rem .9rem;border-radius:50px;font-size:.8rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:1rem}
+.hero-emoji{font-size:clamp(3.5rem,9vw,6rem);letter-spacing:.2em;filter:drop-shadow(0 12px 24px rgba(0,0,0,.4));animation:flotar 4s ease-in-out infinite}
+@keyframes flotar{50%{transform:translateY(-14px)}}
+.btn{border-radius:50px;font-weight:600;padding:.6rem 1.5rem;transition:.2s}
+.btn-accent,.btn-primary{--bs-btn-bg:var(--color-accent);--bs-btn-border-color:var(--color-accent);--bs-btn-hover-bg:#c93550;--bs-btn-hover-border-color:#c93550;
+--bs-btn-active-bg:#b02d46;--bs-btn-active-border-color:#b02d46;--bs-btn-disabled-bg:var(--color-accent);--bs-btn-disabled-border-color:var(--color-accent);--bs-btn-color:#fff;--bs-btn-hover-color:#fff;--bs-btn-active-color:#fff;
+box-shadow:0 6px 18px rgba(233,69,96,.35)}
+.btn-accent:hover,.btn-primary:hover{transform:translateY(-2px)}
+#inicio .btn-outline-light{--bs-btn-hover-color:var(--color-dark)}
+
+/* Títulos */
+.section-title{font-weight:800;position:relative;padding-bottom:1rem}
+.section-title::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:64px;height:4px;border-radius:4px;background:var(--color-accent)}
+.text-muted{color:#6c7293!important}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.stat-card{background:#fff;border-radius:16px;padding:1.4rem 1rem;text-align:center;box-shadow:0 8px 24px rgba(26,26,46,.08);border-top:4px solid var(--color-accent)}
+.stat-card strong{display:block;font-size:2.2rem;font-weight:800;color:var(--color-dark);line-height:1}
+.stat-card span{font-size:.85rem;color:#6c7293}
+
+/* Filtros */
+.filtro-btn{border:2px solid var(--color-dark);background:transparent;color:var(--color-dark);border-radius:50px;padding:.35rem 1.1rem;font-weight:600;font-size:.9rem;transition:.2s}
+.filtro-btn:hover,.filtro-btn.activo{background:var(--color-dark);color:#fff}
+
+/* Tarjetas de producto */
+.tarjeta-producto{height:100%;background:#fff;border-radius:18px;padding:1.5rem;text-align:center;box-shadow:0 6px 20px rgba(26,26,46,.08);transition:.25s;display:flex;flex-direction:column;align-items:center}
+.tarjeta-producto:hover{transform:translateY(-8px);box-shadow:0 16px 36px rgba(233,69,96,.2)}
+.tarjeta-emoji{font-size:3.4rem;width:96px;height:96px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#fff0f3,#eef1ff);margin-bottom:1rem}
+.tarjeta-producto h3{font-size:1.1rem;font-weight:700}
+.tarjeta-producto p{font-size:.88rem;color:#6c7293;flex:1}
+.badge{font-weight:600;padding:.4em .8em;border-radius:50px}
+.badge-cat{background:var(--color-dark);color:#fff}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:none}
+
+/* Formularios */
+.form-control,.form-select{border-radius:12px;border:1.5px solid #dfe2ee;padding:.7rem 1rem}
+.form-control:focus,.form-select:focus{border-color:var(--color-accent);box-shadow:0 0 0 .25rem rgba(233,69,96,.2)}
+.form-control.is-invalid,.form-select.is-invalid{border-color:#dc3545}
+#registrar .col-md-7>form,#contacto .col-md-7{background:#fff;border-radius:20px;padding:2rem;box-shadow:0 10px 30px rgba(26,26,46,.08)}
+#contacto .col-md-7{margin-bottom:0}
+
+/* Tabla */
+.table-responsive{background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(26,26,46,.08);overflow:hidden}
+#tablaProductos{margin:0}
+#tablaProductos thead{background:var(--color-dark);color:#fff}
+#tablaProductos thead th{background:var(--color-dark);color:#fff;padding:1rem;border:0}
+#tablaProductos td{padding:.9rem 1rem}
+
+/* Video, aside, modal */
+.ratio{border-radius:20px;overflow:hidden;box-shadow:0 16px 40px rgba(26,26,46,.25);max-width:860px;margin:0 auto}
+.info-aside{background:linear-gradient(135deg,var(--color-dark),var(--color-mid));color:#fff;border-radius:20px;padding:2rem;height:100%}
+.info-aside h5{color:#ff8fa3;font-weight:700}
+.modal-content{border:0;border-radius:18px;overflow:hidden}
+.modal-emoji{font-size:4rem}
+
+/* Footer */
+footer{background:var(--color-dark);color:#fff;padding:2.5rem 0;border-top:4px solid var(--color-accent)}
+.footer-sub{color:rgba(255,255,255,.55);font-size:.85rem}
+
+@media(max-width:575px){section{padding:3.5rem 0}#inicio{padding:4.5rem 0 3.5rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
